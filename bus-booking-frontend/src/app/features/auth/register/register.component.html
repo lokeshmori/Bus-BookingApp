@@ -1,0 +1,193 @@
+<section
+  class="min-h-screen flex items-center justify-center
+         bg-gradient-to-br from-blue-50 to-indigo-100 px-4"
+>
+
+  <!-- MAIN CONTAINER -->
+  <div
+    class="w-full max-w-4xl bg-white
+           rounded-xl shadow-lg
+           grid grid-cols-1 md:grid-cols-2
+           overflow-hidden"
+  >
+
+    <!-- LEFT: MANUAL REGISTER -->
+    <div class="p-8">
+
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">
+        Create Account
+      </h2>
+               
+        <div *ngIf="successMessage()" class="mt-4 text-sm text-center text-blue-600">{{ successMessage() }}</div>
+
+      <!-- FULL NAME -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Full Name
+        </label>
+
+        <input
+          #name="ngModel"
+          ngModel
+          name="name"
+          required
+          placeholder="John Doe"
+          class="w-full h-11 px-3 rounded-md
+                 border border-gray-300
+                 focus:outline-none focus:ring-2
+                 focus:ring-blue-500 focus:border-blue-500"
+        />
+
+        <p
+          *ngIf="name.invalid && name.touched"
+          class="mt-1 text-xs text-red-600"
+        >
+          Full name is required
+        </p>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Email
+        </label>
+
+        <input
+          #email="ngModel"
+          ngModel
+          name="email"
+          type="email"
+          required
+          placeholder="you@example.com"
+          class="w-full h-11 px-3 rounded-md
+                 border border-gray-300
+                 focus:outline-none focus:ring-2
+                 focus:ring-blue-500 focus:border-blue-500"
+        />
+
+        <p
+          *ngIf="email.invalid && email.touched"
+          class="mt-1 text-xs text-red-600"
+        >
+          <span *ngIf="email.errors?.['required']">
+            Email is required
+          </span>
+          <span *ngIf="email.errors?.['email']">
+            Enter a valid email address
+          </span>
+        </p>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Password
+        </label>
+
+        <input
+          #password="ngModel"
+          ngModel
+          name="password"
+          type="password"
+          required
+          minlength="6"
+          placeholder="Create a password"
+          class="w-full h-11 px-3 rounded-md
+                 border border-gray-300
+                 focus:outline-none focus:ring-2
+                 focus:ring-blue-500 focus:border-blue-500"
+        />
+
+        <p
+          *ngIf="password.invalid && password.touched"
+          class="mt-1 text-xs text-red-600"
+        >
+          <span *ngIf="password.errors?.['required']">
+            Password is required
+          </span>
+          <span *ngIf="password.errors?.['minlength']">
+            Password must be at least 6 characters
+          </span>
+        </p>
+      </div>
+
+      <!-- SIGN UP BUTTON -->
+      <button
+       (click)="register(name.value ,email.value, password.value)"
+        [disabled]="name.invalid || email.invalid || password.invalid"
+        
+        class="w-full h-11
+               bg-blue-600 text-white
+               font-semibold rounded-md
+               hover:bg-blue-700 transition
+               disabled:bg-gray-300
+               disabled:cursor-not-allowed"
+      >
+         {{ loading() ? 'Registering...' : 'Register' }}
+      </button>
+
+      <p
+        *ngIf="error()"
+        class="mt-4 text-sm text-red-600"
+      >
+        {{ error() }}
+      </p>
+
+      <!-- LOGIN LINK -->
+      <p class="mt-4 text-sm text-gray-600">
+        Already have an account?
+        <a
+          routerLink="/auth/login"
+          class="text-blue-600 hover:underline"
+        >
+          Login
+        </a>
+      </p>
+
+    </div>
+
+    <!-- RIGHT: SOCIAL SIGNUP -->
+    <div
+      class="p-8 bg-gray-50
+             flex flex-col justify-center"
+    >
+
+      <h3 class="text-lg font-semibold text-gray-800 mb-6 text-center">
+        Sign up with
+      </h3>
+
+      <button
+        class="w-full h-11 mb-4
+               flex items-center justify-center gap-2
+               border rounded-md bg-white
+               hover:bg-gray-100 transition"
+      >
+        <img src="assets/image/google-i.png" class="h-5" />
+        Continue with Google
+      </button>
+
+      <button
+        class="w-full h-11 mb-4
+               flex items-center justify-center gap-2
+               border rounded-md bg-white
+               hover:bg-gray-100 transition"
+      >
+        <img src="assets/image/facebook.png" class="h-5" />
+        Continue with Facebook
+      </button>
+
+      <button
+        class="w-full h-11
+               flex items-center justify-center gap-2
+               border rounded-md bg-white
+               hover:bg-gray-100 transition"
+      >
+        <img src="assets/image/x.png" class="h-5" />
+        Continue with X
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

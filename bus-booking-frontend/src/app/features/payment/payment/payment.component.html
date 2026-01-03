@@ -1,0 +1,67 @@
+<section
+  class="min-h-[60vh]
+         flex flex-col items-center justify-center
+         px-4 sm:px-6 lg:px-8"
+>
+
+  <!-- PAYMENT CARD -->
+  <div
+    class="w-full max-w-md
+           bg-white border rounded-xl
+           shadow-md p-6 text-center"
+  >
+
+    <!-- TITLE -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">
+      Payment
+    </h2>
+
+    <!-- LOADING STATE -->
+    <div *ngIf="!loading()">
+
+      <!-- SPINNER -->
+      <div
+        class="mx-auto mb-4
+               h-10 w-10
+               border-4 border-blue-200
+               border-t-blue-600
+               rounded-full animate-spin"
+      ></div>
+
+      <p class="text-gray-600 font-medium">
+        Redirecting to payment gateway...
+      </p>
+
+    </div>
+
+    <!-- READY STATE -->
+    <div *ngIf="!loading()">
+
+      <p class="text-gray-700 mb-6">
+        Please complete your payment to confirm your booking.
+      </p>
+
+      <!-- TRUST INDICATORS -->
+      <div class="flex justify-center gap-4 mb-6">
+        <img src="assets/image/upi.png" class="h-6" alt="UPI" />
+        <img src="assets/image/visa.png" class="h-6" alt="Visa" />
+        <img src="assets/image/master-card.png" class="h-6" alt="Mastercard" />
+      </div>
+
+      <!-- CTA (Optional if manual trigger exists) 
+      <button
+        class="w-full h-11
+               bg-blue-600 text-white
+               font-semibold rounded-md
+               hover:bg-blue-700 transition
+               focus:outline-none focus:ring-2
+               focus:ring-blue-500"
+      >
+        Continue to Payment
+      </button>
+-->
+    </div>
+
+  </div>
+
+</section>

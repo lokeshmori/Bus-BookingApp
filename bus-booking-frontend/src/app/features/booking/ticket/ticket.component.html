@@ -1,0 +1,100 @@
+<section
+  *ngIf="ticket()"
+  class="max-w-4xl mx-auto
+         px-4 sm:px-6 lg:px-8
+         py-8"
+>
+
+  <!-- TICKET CARD -->
+  <div
+    class="bg-white border-2 border-dashed
+           rounded-xl shadow-md
+           p-6 print:border-none print:shadow-none"
+  >
+
+    <!-- HEADER -->
+    <div class="flex flex-col sm:flex-row
+                justify-between gap-4
+                mb-6">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">
+          E-Ticket
+        </h2>
+        <p class="text-sm text-gray-600 mt-1">
+          Booking Ref:
+          <strong class="text-gray-900">
+            {{ ticket()!.bookingReference }}
+          </strong>
+        </p>
+      </div>
+
+      <div class="text-sm text-gray-600 sm:text-right">
+        <p class="font-semibold text-gray-800">
+          {{ ticket()!.source }} → {{ ticket()!.destination }}
+        </p>
+        <p>
+          {{ ticket()!.departureTime }} – {{ ticket()!.arrivalTime }}
+        </p>
+      </div>
+    </div>
+
+    <!-- PASSENGERS -->
+    <h3 class="text-lg font-semibold text-gray-800 mb-3">
+      Passengers
+    </h3>
+
+    <div class="overflow-x-auto">
+      <table
+        class="w-full text-sm
+               border border-gray-300
+               border-collapse"
+      >
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="border px-3 py-2 text-left">Name</th>
+            <th class="border px-3 py-2 text-left">Seat</th>
+            <th class="border px-3 py-2 text-left">Age</th>
+            <th class="border px-3 py-2 text-left">Gender</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let p of ticket()!.passengerDetails"
+            class="even:bg-gray-50"
+          >
+            <td class="border px-3 py-2">{{ p.name }}</td>
+            <td class="border px-3 py-2">{{ p.seatNumber }}</td>
+            <td class="border px-3 py-2">{{ p.age }}</td>
+            <td class="border px-3 py-2">{{ p.gender }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FOOTER -->
+    <div
+      class="mt-6 flex flex-col sm:flex-row
+             justify-between items-center gap-4"
+    >
+      <p class="text-lg font-semibold text-green-600">
+        Total Paid: ₹ {{ ticket()!.totalAmount }}
+      </p>
+
+      <button
+        (click)="print()"
+        class="h-11 px-6
+               bg-blue-600 text-white
+               font-semibold rounded-md
+               hover:bg-blue-700 transition
+               focus:outline-none focus:ring-2
+               focus:ring-blue-500
+               print:hidden"
+      >
+        Print Ticket
+      </button>
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,89 @@
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+  <!-- SEARCH FORM -->
+  <div
+    class="bg-white rounded-xl shadow-md p-12
+           grid grid-cols-1 md:grid-cols-4 gap-4 items-end"
+  >
+    <!-- Source -->
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-900 mb-1">
+        From
+      </label>
+      <input
+        #src
+        type="text"
+        placeholder="Source City"
+        class="h-11 px-3 rounded-md border border-gray-300
+               focus:outline-none focus:ring-2 focus:ring-blue-500
+               focus:border-blue-500"
+      />
+    </div>
+
+    <!-- Destination -->
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-900 mb-1">
+        To
+      </label>
+      <input
+        #dest
+        type="text"
+        placeholder="Destination City"
+        class="h-11 px-3 rounded-md border border-gray-300
+               focus:outline-none focus:ring-2 focus:ring-blue-500
+               focus:border-blue-500"
+      />
+    </div>
+
+    <!-- Date -->
+    <div class="flex flex-col">
+      <label class="text-sm font-medium text-gray-900 mb-1">
+        Journey Date
+      </label>
+      <input
+        #date
+        type="date"
+        class="h-11 px-3 rounded-md border border-gray-300
+               focus:outline-none focus:ring-2 focus:ring-blue-500
+               focus:border-blue-500"
+      />
+    </div>
+
+    <!-- Search Button -->
+    <button
+      (click)="search(src.value, dest.value, date.value)"
+      class="h-11 bg-blue-600 text-white font-semibold rounded-md
+             hover:bg-blue-700 transition
+             focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      Search Buses
+    </button>
+  </div>
+
+  <!-- LOADING STATE -->
+  <p
+    *ngIf="loading()"
+    class="mt-6 text-center text-gray-600 font-medium"
+  >
+    Loading trips...
+  </p>
+
+  <!-- RESULTS -->
+  <ng-container *ngIf="!loading() && trips().length" >
+    <div class="mt-8 space-y-4 gap-4  flex flex-col sm:flex-col">
+      <app-trip-card
+        *ngFor="let trip of trips()"
+        [trip]="trip">
+      </app-trip-card>
+    </div>
+  </ng-container>
+
+  <!-- EMPTY STATE -->
+  <p
+    *ngIf="searched() && !loading() && trips().length === 0"
+    class="mt-8 text-center text-gray-500 font-medium"
+  >
+    No buses found for selected route and date.
+  </p>
+
+</section>

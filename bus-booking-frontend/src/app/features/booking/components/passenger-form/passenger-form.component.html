@@ -1,0 +1,52 @@
+<div
+  class="bg-white border rounded-lg shadow-sm
+         p-4"
+>
+
+  <!-- HEADER -->
+  <h4 class="text-base font-semibold text-gray-800 mb-4">
+    Passenger {{ index + 1 }}
+  </h4>
+
+  <!-- FORM GRID -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-3 gap-4"
+  >
+
+    <!-- NAME -->
+    <input
+      placeholder="Name"
+      [(ngModel)]="passenger.name"
+      (input)="emitChange()"
+      class="h-11 px-3 rounded-md border border-gray-300
+             focus:outline-none focus:ring-2
+             focus:ring-blue-500 focus:border-blue-500"
+    />
+
+    <!-- AGE -->
+    <input
+      type="number"
+      placeholder="Age"
+      [(ngModel)]="passenger.age"
+      (input)="emitChange()"
+      class="h-11 px-3 rounded-md border border-gray-300
+             focus:outline-none focus:ring-2
+             focus:ring-blue-500 focus:border-blue-500"
+    />
+
+    <!-- GENDER -->
+    <select
+      [(ngModel)]="passenger.gender"
+      (change)="emitChange()"
+      class="h-11 px-3 rounded-md border border-gray-300
+             bg-white
+             focus:outline-none focus:ring-2
+             focus:ring-blue-500 focus:border-blue-500"
+    >
+      <option value="MALE">Male</option>
+      <option value="FEMALE">Female</option>
+    </select>
+
+  </div>
+
+</div>

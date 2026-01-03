@@ -1,0 +1,108 @@
+
+
+
+
+<div class="bg-gray-50 rounded-xl p-6">
+
+  <div
+  class="flex items-center mb-4"
+  [ngClass]="driverSide === 'RIGHT' ? 'justify-end' : 'justify-start'"
+>
+  <div
+    class="flex items-center gap-2
+           px-3 py-2 border rounded-md
+           bg-white shadow-sm"
+  >
+    <div
+      class="w-6 h-6 rounded-full
+             border-2 border-gray-700
+             flex items-center justify-center"
+    >
+      <div class="w-2 h-2 bg-gray-700 rounded-full"></div>
+    </div>
+
+    <span class="text-sm font-medium text-gray-700">
+      Driver ({{ driverSide }})
+    </span>
+  </div>
+</div> 
+<div
+  class="flex items-center gap-2 mb-6"
+  [ngClass]="driverSide === 'RIGHT' ? 'justify-justify-start' : 'justify-start'"
+>
+  <div
+    class="w-10 h-12 border-2 border-gray-500
+           rounded-sm bg-gray-100
+           flex flex-col items-center justify-center"
+  >
+    <div class="w-1 h-6 bg-gray-500"></div>
+  </div>
+  <span class="text-xs text-gray-600 font-medium">
+    Front Door
+  </span>
+</div>
+
+
+  <!-- SEAT GRID -->
+  <div
+    class="grid grid-cols-5 gap-3
+           justify-items-center"
+  >
+
+    <ng-container *ngFor="let seat of seats; let i = index">
+
+      <!-- LEFT SEATS -->
+      <app-seat
+        *ngIf="i % 4 === 0 || i % 4 === 1"
+        [seat]="seat"
+        (toggle)="onSeatToggle($event)">
+      </app-seat>
+
+      <!-- AISLE GAP -->
+      <div
+        *ngIf="i % 4 === 2"
+        class="w-6"
+      ></div>
+
+      <!-- RIGHT SEATS -->
+      <app-seat
+        *ngIf="i % 4 === 2 || i % 4 === 3"
+        [seat]="seat"
+        (toggle)="onSeatToggle($event)">
+      </app-seat>
+
+    </ng-container>
+
+  </div>
+
+</div>
+
+
+<div class="flex flex-wrap gap-4 text-sm mt-4">
+
+  <div class="flex items-center gap-2">
+    <span class="w-4 h-4 bg-white border border-gray-400 rounded"></span>
+    Available
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="w-4 h-4 bg-green-500 rounded"></span>
+    Selected
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="w-4 h-4 bg-gray-300 rounded"></span>
+    Booked
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="w-4 h-4 bg-yellow-300 rounded"></span>
+    Locked
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span class="w-4 h-4 border-2 border-pink-400 rounded"></span>
+    Ladies
+  </div>
+
+</div>

@@ -1,0 +1,27 @@
+.seat {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+
+  &.available {
+    background: #e0f7fa;
+  }
+
+  &.selected {
+    background: #4caf50;
+    color: #fff;
+  }
+
+  &.locked {
+    background: #ffcc80;
+    cursor: not-allowed;
+  }
+
+  &.booked {
+    background: #bdbdbd;
+    cursor: not-allowed;
+  }
+}

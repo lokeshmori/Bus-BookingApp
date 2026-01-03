@@ -1,0 +1,186 @@
+<section
+  class="min-h-screen flex items-center justify-center
+         bg-gradient-to-br from-blue-50 to-indigo-100 px-4"
+>
+
+  <!-- MAIN CONTAINER -->
+  <div
+    class="w-full max-w-4xl bg-white
+           rounded-xl shadow-lg
+           grid grid-cols-1 md:grid-cols-2
+           overflow-hidden"
+  >
+
+    <!-- LEFT: MANUAL LOGIN -->
+    <div class="p-8">
+
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">
+        Login
+      </h2>
+
+      <!-- EMAIL -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Email
+        </label>
+
+        <input
+          #email="ngModel"
+          ngModel
+          name="email"
+          type="email"
+          required
+          placeholder="you@example.com"
+          class="w-full h-11 px-3 rounded-md
+                 border border-gray-300
+                 focus:outline-none focus:ring-2
+                 focus:ring-blue-500 focus:border-blue-500"
+        />
+
+        <!-- EMAIL ERROR -->
+        <p
+          *ngIf="email.invalid && email.touched"
+          class="mt-1 text-xs text-red-600"
+        >
+          <span *ngIf="email.errors?.['required']">
+            Email is required
+          </span>
+          <span *ngIf="email.errors?.['email']">
+            Enter a valid email address
+          </span>
+        </p>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Password
+        </label>
+
+        <input
+          #password="ngModel"
+          ngModel
+          name="password"
+          type="password"
+          required
+          placeholder="••••••••"
+          class="w-full h-11 px-3 rounded-md
+                 border border-gray-300
+                 focus:outline-none focus:ring-2
+                 focus:ring-blue-500 focus:border-blue-500"
+        />
+
+        <!-- PASSWORD ERROR -->
+        <p
+          *ngIf="password.invalid && password.touched"
+          class="mt-1 text-xs text-red-600"
+        >
+          Password is required
+        </p>
+      </div>
+
+      <!-- REMEMBER / FORGOT -->
+      <div class="flex items-center justify-between mb-6">
+        <label class="flex items-center gap-2 text-sm text-gray-600">
+          <input
+            type="checkbox"
+            class="rounded border-gray-300
+                   text-blue-600 focus:ring-blue-500"
+          />
+          Remember me
+        </label>
+
+        <a
+          routerLink="/auth/forgot-password"
+          class="text-sm text-blue-600 hover:underline"
+        >
+          Forgot password?
+        </a>
+      </div>
+
+      <!-- LOGIN BUTTON -->
+      <button
+        (click)="login(email.value, password.value)"
+        [disabled]="email.invalid || password.invalid || loading()"
+        class="w-full h-11 bg-blue-600
+               text-white font-semibold rounded-md
+               hover:bg-blue-700 transition
+               disabled:bg-gray-300
+               disabled:cursor-not-allowed"
+      >
+        <span *ngIf="!loading()">Login</span>
+        <span *ngIf="loading()" class="flex items-center justify-center gap-2">
+          <span
+            class="h-4 w-4 border-2 border-white
+                   border-t-transparent rounded-full animate-spin"
+          ></span>
+          Logging in...
+        </span>
+      </button>
+
+      <!-- BACKEND ERROR -->
+      <p
+        *ngIf="error()"
+        class="mt-4 text-sm text-red-600"
+      >
+        {{ error() }}
+      </p>
+
+      <!-- REGISTER LINK -->
+      <p class="mt-4 text-sm text-gray-600">
+        Don’t have an account?
+        <a
+          routerLink="/auth/register"
+          class="text-blue-600 hover:underline"
+        >
+          Register
+        </a>
+      </p>
+
+    </div>
+
+    <!-- RIGHT: SOCIAL LOGIN -->
+    <div
+      class="p-8 bg-gray-50
+             flex flex-col justify-center"
+    >
+
+      <h3 class="text-lg font-semibold text-gray-800 mb-6 text-center">
+        Continue with
+      </h3>
+
+      <button
+        class="w-full h-11 mb-4
+               flex items-center justify-center gap-2
+               border rounded-md bg-white
+               hover:bg-gray-100 transition"
+      >
+        <img src="assets/image/google-i.png" class="h-5" />
+        Continue with Google
+      </button>
+
+      <button
+        class="w-full h-11 mb-4
+               flex items-center justify-center gap-2
+               border rounded-md bg-white
+               hover:bg-gray-100 transition"
+      >
+        <img src="assets/image/facebook.png" class="h-5" />
+        Continue with Facebook
+      </button>
+
+      <button
+        class="w-full h-11
+               flex items-center justify-center gap-2
+               border rounded-md bg-white
+               hover:bg-gray-100 transition"
+      >
+        <img src="assets/image/x.png" class="h-5" />
+        Continue with X
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
